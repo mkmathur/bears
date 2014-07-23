@@ -20,9 +20,35 @@
 
   router = express.Router();
 
+  router.use(function(req, res, next) {
+    console.log('something is happening');
+    return next();
+  });
+
   router.get('/', function(req, res) {
     return res.json({
       message: 'hooray! welcome to our api!'
+    });
+  });
+
+  router.route('/bears').post(function(req, res) {
+    var bear;
+    bear = new Bear();
+    bear.name = req.body.name;
+    return bear.save(function(err) {
+      if (err) {
+        res.send(err);
+      }
+      return res.json({
+        message: 'Bear created!'
+      });
+    });
+  }).get(function(req, res) {
+    return Bear.find(function(err, bears) {
+      if (err) {
+        res.send(err);
+      }
+      return res.json(bears);
     });
   });
 
