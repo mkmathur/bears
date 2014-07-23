@@ -1,8 +1,14 @@
-# PACKAGES
+# BASE SETUP
 
+# packages we need
 express = require 'express'
 app = express()
 bodyParser = require 'body-parser'
+mongoose = require 'mongoose'
+Bear = require './models/bear'
+
+# connect to database
+mongoose.connect 'mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'
 
 # CONFIGURE
 
