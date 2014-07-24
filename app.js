@@ -40,7 +40,7 @@
         res.send(err);
       }
       return res.json({
-        message: 'Bear created!'
+        message: 'Bear with name ' + bear.name + ' created!'
       });
     });
   }).get(function(req, res) {
@@ -49,6 +49,41 @@
         res.send(err);
       }
       return res.json(bears);
+    });
+  });
+
+  router.route('/bears/:bear_id').get(function(req, res) {
+    return Bear.findById(req.params.bear_id, function(err, bear) {
+      if (err) {
+        res.send(err);
+      }
+      return res.json(bear);
+    });
+  }).put(function(req, res) {
+    return Bear.findById(req.params.bear_id, function(err, bear) {
+      if (err) {
+        res.send(err);
+      }
+      bear.name = req.body.name;
+      return bear.save(function(err) {
+        if (err) {
+          res.send(err);
+        }
+        return res.json({
+          message: 'Bear with name ' + bear.name + ' updated!'
+        });
+      });
+    });
+  })["delete"](function(req, res) {
+    return Bear.remove({
+      _id: req.params.bear_id
+    }, function(err, bear) {
+      if (err) {
+        res.send(err);
+      }
+      return res.json({
+        message: 'Bear deleted!'
+      });
     });
   });
 
