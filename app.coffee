@@ -8,7 +8,13 @@ mongoose = require 'mongoose'
 Bear = require './models/bear'
 
 # connect to database
-mongoose.connect(process.env.MONGOLAB_URI ||process.env.MONGOHQ_URL)
+# local
+# dbURI = 'mongodb://localhost/bears' 
+
+# on the web
+dbURI = process.env.MONGOLAB_URI ||process.env.MONGOHQ_URL
+
+mongoose.connect dbURI
 
 # CONFIGURE
 
