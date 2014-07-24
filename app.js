@@ -12,7 +12,7 @@
 
   Bear = require('./models/bear');
 
-  mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o');
+  mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL);
 
   app.use(bodyParser());
 

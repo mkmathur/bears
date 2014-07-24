@@ -8,7 +8,7 @@ mongoose = require 'mongoose'
 Bear = require './models/bear'
 
 # connect to database
-mongoose.connect 'mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'
+mongoose.connect(process.env.MONGOLAB_URI ||process.env.MONGOHQ_URL)
 
 # CONFIGURE
 
